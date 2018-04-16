@@ -15,6 +15,12 @@ class StateLogQuerySet(QuerySet):
             object_id=obj.pk
         )
 
+    def filter_(self, obj, **kwargs):
+        return self.filter(
+            content_type=self._get_content_type(obj),
+            **kwargs,
+        )
+
 
 class StateLogManager(models.Manager):
     def get_queryset(self):
